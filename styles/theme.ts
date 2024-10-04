@@ -48,6 +48,7 @@ export const theme = {
       secondary: "#16423C", // Main green
       Tertiary: "#C4DAD2", // More Lighter green
       fourth: "#E9EFEC",
+      white: "#fff",
       grey: "#E9EFEC", // grey color
       headerBackground: "#16423C", // Background color for headers
       background: "#C4DAD2", // Black background
@@ -57,7 +58,7 @@ export const theme = {
       textSecondary: "#C4DAD2", // Medium text for contrast
       border: "#6A9C89", // Lighter green for borders
       active: "#6A9C89", // To primary green
-      inactive: "#555555", // Dark gray for inactive state
+      inactive: "#fff", // Dark gray for inactive state
       activeBackground: "#333333", // Dark background for active items
       contrast: "#FFFFFF", // White for contrast
       mutedText: "#AAAAAA", // Muted gray text

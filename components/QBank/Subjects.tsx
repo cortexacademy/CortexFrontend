@@ -17,10 +17,10 @@ const Subject: React.FC<SubjectProps> = ({ subject, onSelect }) => {
         key={subject.id}
         style={{
           backgroundColor: appTheme.colors.secondary,
-          borderRadius: appTheme.borderRadius.medium,
-          shadowColor: appTheme.colors.textSecondary,
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.2,
+          borderRadius: appTheme.borderRadius.small,
+          shadowColor: appTheme.colors.secondary,
+          shadowOffset: { width: 0, height: 5 },
+          shadowOpacity: 0.6,
           shadowRadius: 4,
           elevation: 5,
           marginBottom: appTheme.spacing.medium,
