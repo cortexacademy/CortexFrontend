@@ -67,13 +67,13 @@ const SubjectsPage: React.FC = () => {
           name: 'search',
           type: 'ionicon',
           size: 20,
-          color: appTheme.colors.textSecondary,
+          color: appTheme.colors.inputicon,
         }}
         clearIcon={{
           name: 'close-circle',
           type: 'ionicon',
           size: 20,
-          color: appTheme.colors.textSecondary,
+          color: appTheme.colors.inputicon,
           onPress: () => setSearchQuery(''),
         }}
         onBlur={() => { }}

@@ -16,7 +16,7 @@ const Subject: React.FC<SubjectProps> = ({ subject, onSelect }) => {
       <View
         key={subject.id}
         style={{
-          backgroundColor: appTheme.colors.background,
+          backgroundColor: appTheme.colors.secondary,
           borderRadius: appTheme.borderRadius.medium,
           shadowColor: appTheme.colors.textSecondary,
           shadowOffset: { width: 0, height: 2 },

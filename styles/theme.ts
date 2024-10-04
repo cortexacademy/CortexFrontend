@@ -6,12 +6,12 @@ export const theme = {
       Tertiary: "#C4DAD2", // More Lighter green
       fourth: "#E9EFEC",
       grey: "#E9EFEC", // grey color
-      headerBackground: "#6A9C89", // Background color for headers
-      background: "#C4DAD2", // Light background
+      headerBackground: "#16423C", // Background color for headers
+      background: "#16423C", // Light background
       secondaryBackground: "#6A9C89",
       text: "#16423C", // Black text
       textPrimary: "#16423C", // Light text for contrast
-      textSecondary: "#6A9C89", // Medium text for contrast
+      textSecondary: "#16423C", // Medium text for contrast
       border: "#C4DAD2", // Border color (muted greenish)
       active: "#16423C", // primary green
       inactive: "#AAAAAA", // Gray for inactive state
@@ -22,6 +22,7 @@ export const theme = {
       errorText: "#808080", // Muted gray text
       inputBackground: "#E9EFEC", // Light background for inputs
       placeholder: "#AAAAAA", // Placeholder gray text
+      inputicon: "#16423C", // Placeholder gray text
     },
     fontSizes: {
       small: 12,
@@ -49,8 +50,8 @@ export const theme = {
       fourth: "#E9EFEC",
       grey: "#E9EFEC", // grey color
       headerBackground: "#16423C", // Background color for headers
-      background: "#121212", // Black background
-      secondaryBackground: "#6A9C89", // Black background
+      background: "#C4DAD2", // Black background
+      secondaryBackground: "#16423C",
       text: "#E9EFEC", // Light text for contrast
       textPrimary: "#E9EFEC", // Light text for contrast
       textSecondary: "#C4DAD2", // Medium text for contrast
@@ -62,8 +63,9 @@ export const theme = {
       mutedText: "#AAAAAA", // Muted gray text
       errorText: "#AAAAAA", // Muted gray text
       errorBackground: "#AAAAAA", // Muted gray text
-      inputBackground: "#333333", // Dark input background
+      inputBackground: "#E9EFEC", // Dark input background
       placeholder: "#555555", // Placeholder gray text
+      inputicon: "#16423C", // Placeholder gray text
     },
     fontSizes: {
       small: 12,

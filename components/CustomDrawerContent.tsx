@@ -24,27 +24,25 @@ export const CustomDrawerContent = (props: any) => {
             position: "absolute",
             top: 0,
             width: "100%",
-            height: 4,
+            height: 6,
             backgroundColor: appTheme.colors.primary,
-            borderRadius: 1.5
-          }}
-
-          />
+            borderRadius: 5
+          }} />
           <View style={{
             position: "absolute",
             top: 40,
-            width: "80%",
-            height: 4,
+            width: "85%",
+            height: 6,
             backgroundColor: appTheme.colors.primary,
-            borderRadius: 1.5
+            borderRadius: 5
           }} />
           <View style={{
             position: "absolute",
             top: 80,
-            width: "60%",
-            height: 4,
+            width: "70%",
+            height: 6,
             backgroundColor: appTheme.colors.primary,
-            borderRadius: 1.5
+            borderRadius: 5
           }} />
         </View>
 

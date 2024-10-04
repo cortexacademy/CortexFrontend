@@ -26,7 +26,7 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerLeft: () => <DrawerToggleButton tintColor={appTheme.colors.text} />,
-        tabBarStyle: { backgroundColor: appTheme.colors.background },
+        tabBarStyle: { backgroundColor: appTheme.colors.headerBackground },
         tabBarLabelStyle: {
           padding: 0,
         },
