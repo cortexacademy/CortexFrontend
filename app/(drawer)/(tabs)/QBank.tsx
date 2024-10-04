@@ -48,19 +48,19 @@ const SubjectsPage: React.FC = () => {
   );
 
   return (
-    <View className="flex-1" style={{ backgroundColor: appTheme.colors.fourth, height: "100%" }}>
+    <View className="flex-1" style={{ backgroundColor: appTheme.colors.quaternary, height: "100%" }}>
       <SearchBar
         placeholder="Search subjects..."
         value={searchQuery}
         onChangeText={handleSearchInputChange}
         containerStyle={{
-          backgroundColor: appTheme.colors.secondaryBackground,
+          backgroundColor: appTheme.colors.primary,
         }}
         inputContainerStyle={{
-          backgroundColor: appTheme.colors.inputBackground,
+          backgroundColor: appTheme.colors.quaternary,
         }}
         inputStyle={{
-          color: appTheme.colors.text,
+          color: appTheme.colors.primary,
         }}
         placeholderTextColor={appTheme.colors.placeholder}
         searchIcon={{
@@ -91,14 +91,14 @@ const SubjectsPage: React.FC = () => {
       />
 
       <ScrollView>
-        <View className="flex-1 pt-2 pb-2 pl-8 pr-8 mt-4" style={{ backgroundColor: appTheme.colors.fourth, height: "100%" }}>
+        <View className="flex-1 pt-2 pb-2 pl-8 pr-8 mt-4" style={{ backgroundColor: appTheme.colors.quaternary, height: "100%" }}>
           {filteredSubjects.length > 0 ? (
             filteredSubjects.map((subject) => (
               <Subject key={subject.id} subject={subject} onSelect={handleSelectSubject} />
             ))
           ) : (
             <View className="flex-1 justify-center items-center">
-              <Text style={{ color: appTheme.colors.textSecondary }}>No subjects found matching your search.</Text>
+              <Text style={{ color: appTheme.colors.primary }}>No subjects found matching your search.</Text>
             </View>
           )}
         </View>

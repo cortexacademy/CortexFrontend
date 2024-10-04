@@ -25,15 +25,19 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
-        headerLeft: () => <DrawerToggleButton tintColor={appTheme.colors.text} />,
-        tabBarStyle: { backgroundColor: appTheme.colors.headerBackground },
+        headerLeft: () => <DrawerToggleButton tintColor={appTheme.colors.white} />,
+        tabBarStyle: {
+          height: 55,
+          paddingTop: 4,
+          backgroundColor: appTheme.colors.headerBackground
+        },
         tabBarLabelStyle: {
           padding: 0,
         },
         headerStyle: {
           backgroundColor: appTheme.colors.headerBackground,
         },
-        headerTintColor: appTheme.colors.text,
+        headerTintColor: appTheme.colors.white,
       }}
     >
       {tabs.map(({ name, title, icon, iconOutline }) => (
@@ -45,7 +49,7 @@ export default function TabLayout() {
             tabBarIcon: ({ focused }) => (
               <TabBarIcon
                 name={focused ? icon : iconOutline}
-                color={focused ? appTheme.colors.active : appTheme.colors.inactive}
+                color={focused ? appTheme.colors.active : appTheme.colors.white}
                 size={20}
               />
             ),
@@ -53,10 +57,11 @@ export default function TabLayout() {
               <View style={{ alignItems: 'center' }}>
                 <Text
                   style={{
-                    color: focused ? appTheme.colors.active : appTheme.colors.inactive,
+                    color: focused ? appTheme.colors.active : appTheme.colors.white,
                     paddingVertical: 4,
                     fontSize: focused ? 12 : 10,
                     fontWeight: focused ? 'bold' : 'normal',
+                    marginBottom: 4
                   }}
                 >
                   {name === "index" ? "Home" : name}

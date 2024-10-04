@@ -16,17 +16,17 @@ const Subject: React.FC<SubjectProps> = ({ subject, onSelect }) => {
       <View
         key={subject.id}
         style={{
-          backgroundColor: appTheme.colors.secondary,
+          backgroundColor: appTheme.colors.primary,
           borderRadius: appTheme.borderRadius.small,
-          shadowColor: appTheme.colors.secondary,
-          shadowOffset: { width: 0, height: 5 },
-          shadowOpacity: 0.6,
-          shadowRadius: 4,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 10 },
+          shadowOpacity: 0.8,
+          shadowRadius: 10,
           elevation: 5,
           marginBottom: appTheme.spacing.medium,
           flexDirection: 'row',
           alignItems: 'center',
-          borderColor: appTheme.colors.primary,
+          borderColor: appTheme.colors.secondary,
           borderLeftWidth: 6,
           padding: appTheme.spacing.small,
         }}
@@ -36,7 +36,7 @@ const Subject: React.FC<SubjectProps> = ({ subject, onSelect }) => {
           style={{
             width: 50,
             height: 50,
-            borderRadius: 8,
+            borderRadius: appTheme.borderRadius.small,
             marginRight: appTheme.spacing.medium,
           }}
         />
@@ -44,7 +44,7 @@ const Subject: React.FC<SubjectProps> = ({ subject, onSelect }) => {
         <View style={{ flex: 1 }}>
           <Text
             style={{
-              color: appTheme.colors.text,
+              color: appTheme.colors.white,
               fontSize: appTheme.fontSizes.medium,
               fontWeight: 'bold',
             }}
@@ -54,7 +54,7 @@ const Subject: React.FC<SubjectProps> = ({ subject, onSelect }) => {
 
           <Text
             style={{
-              color: appTheme.colors.textSecondary,
+              color: appTheme.colors.white,
               fontSize: appTheme.fontSizes.small,
               marginTop: appTheme.spacing.small,
             }}

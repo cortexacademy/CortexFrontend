@@ -12,7 +12,7 @@ export default function AppStack() {
         headerStyle: {
           backgroundColor: appTheme.colors.headerBackground,
         },
-        headerTintColor: appTheme.colors.text,
+        headerTintColor: appTheme.colors.white,
         headerShown: true,
       }}
     >
