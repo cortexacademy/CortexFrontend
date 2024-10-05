@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import { useLocalSearchParams } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
+import { SearchableList } from '@/components/common/SearchableList';
 import Chapter from '@/components/QBank/Chapter';
 
 const ChaptersModal: React.FC = () => {
@@ -9,20 +10,23 @@ const ChaptersModal: React.FC = () => {
   const { appTheme } = useTheme();
   const parsedChapters = Array.isArray(chapters) ? chapters : (chapters ? JSON.parse(chapters) : []);
 
+  if (!parsedChapters || parsedChapters.length === 0) {
+    return (
+      <View className="flex-1 justify-center items-center" style={{ backgroundColor: appTheme.colors.quaternary }}>
+        <Text style={{ color: appTheme.colors.primary }}>No chapters available.</Text>
+      </View>
+    );
+  }
+
   return (
-    <View
-      style={{
-        backgroundColor: appTheme.colors.background,
-      }} className='flex-1 p-8'
-    >
-      {parsedChapters.length > 0 ? (
-        parsedChapters.map((chapter: any) => (
-          <Chapter key={chapter.id} chapter={chapter} />
-        ))
-      ) : (
-        <Text style={{ color: appTheme.colors.text }}>No chapters available.</Text>
+    <SearchableList
+      items={parsedChapters}
+      searchKey="name"
+      renderItem={(chapter: any) => (
+        <Chapter key={chapter.id} chapter={chapter} />
       )}
-    </View>
+      noItemsText="No chapters found matching your search."
+    />
   );
 };
 

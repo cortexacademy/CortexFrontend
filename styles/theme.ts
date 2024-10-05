@@ -11,8 +11,8 @@ const baseTheme = {
     inactive: "#AAAAAA", // Gray for inactive state
     contrast: "#FFFFFF", // White for contrast
     mutedText: "#808080", // Muted gray text
-    errorText: "#AAAAAA", // Error text
-    errorBackground: "#AAAAAA", // Error background
+    errorText: "#D32F2F", // A dark red
+    errorBackground: "#FDECEA", // Soft pale red/pink
     inputBackground: "#E9EFEC", // Input background
     placeholder: "#AAAAAA", // Placeholder gray text
     inputicon: "#16423C", // Input icon color
