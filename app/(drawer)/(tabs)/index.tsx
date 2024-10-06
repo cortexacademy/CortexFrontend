@@ -1,130 +1,24 @@
 
-// import React from 'react';
-// import { View, Text, Button, Image } from 'react-native';
-// import { useRouter } from 'expo-router';
-// import { useTheme } from '@/hooks/useTheme';
-// import { Divider } from 'react-native-elements';
-
-// export default function Home() {
-//   const router = useRouter();
-//   const { appTheme } = useTheme()
-
-//   return (
-//     <View style={{ flex: 1, backgroundColor: appTheme.colors.background }}>
-//       <View className='items-center justify-center'>
-//         <Image
-//           source={{ uri: "https://randomuser.me/api/portraits/women/26.jpg" }}
-//           style={{ width: '40%', height: '40%' }}
-//         />
-//         <Text>By the doctor, For the doctor</Text>
-//       </View>
-//       <Divider />
-//     </View>
-//   );
-// }
-
-
-import React, { useState } from 'react';
-import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
-import Markdown from 'react-native-markdown-display';
-import { useApi } from '@/hooks/useApi';
-import { Loader } from '@/components/LoaderComponent';
+import React from 'react';
+import { View, Text, Button, Image } from 'react-native';
+import { useRouter } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
-import { Button } from 'react-native-elements';
+import { Divider } from 'react-native-elements';
 
-const QuestionPage: React.FC = () => {
-  const { appTheme } = useTheme();
-  const token = '8bfcea926299a5404998d6a63b9792f14e8e7b70';
-  const { data, isLoading, error } = useApi(`${process.env.EXPO_PUBLIC_API_URL}/question/3/`, token);
-
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [showSolution, setShowSolution] = useState<boolean>(false);
-  const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
-
-  const handleOptionSelect = (optionId: number, isCorrect: boolean) => {
-    setSelectedOption(optionId);
-    setIsOptionSelected(true);
-  };
-
-  if (isLoading) return <Loader />;
-
-  if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-errorBackground">
-        <Text className="text-errorText">
-          Error: {error.message} (Status: {error.status})
-        </Text>
-      </View>
-    );
-  }
-
-  if (!data || !data.data) {
-    return (
-      <View className="flex-1 justify-center items-center bg-background">
-        <Text className="text-textSecondary">No question data available.</Text>
-      </View>
-    );
-  }
-
-  const { statement, options, solution } = data.data;
+export default function Home() {
+  const router = useRouter();
+  const { appTheme } = useTheme()
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 16 }} style={{ backgroundColor: appTheme.colors.quaternary }} className="bg-quaternary">
-      {/* Question Statement */}
-      <View className="rounded-lg p-4 my-3 shadow-md" style={{ backgroundColor: appTheme.colors.tertiary }}>
-        <Markdown>{statement}</Markdown>
-      </View>
-
-      <View className="bg-white rounded-lg p-4 mt-2 shadow-md">
-        {options.map((option: any) => {
-          const isSelected = selectedOption === option.id;
-          const isCorrect = option.is_correct;
-
-          const backgroundColor = isOptionSelected
-            ? isSelected
-              ? isCorrect ? 'bg-green-200' : 'bg-red-200'
-              : isCorrect ? 'bg-green-200' : 'bg-gray-100'
-            : 'bg-white';
-
-          return (
-            <TouchableOpacity
-              className="flex-1"
-              onPress={() => handleOptionSelect(option.id, option.is_correct)}
-            >
-              <View
-                key={option.id}
-                className={`flex-row items-center mb-2 p-2 rounded-lg shadow-sm border border-gray-300 ${backgroundColor}`}
-              >
-                <Markdown>{option.statement}</Markdown>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
-
-      <View className="flex-row justify-start mt-5">
-        <Button
-          className="w-1/2 items-center rounded-lg shadow-lg"
-          style={{ backgroundColor: appTheme.colors.primary }}
-          onPress={() => setShowSolution(!showSolution)}
-          title={!showSolution ? 'Show Solution' : 'Hide Solution'}
-          buttonStyle={{
-            backgroundColor: appTheme.colors.primary,
-            // width: '100%',
-          }}
-          titleStyle={{ color: appTheme.colors.text }}
+    <View style={{ flex: 1, backgroundColor: appTheme.colors.background }}>
+      <View className='items-center justify-center'>
+        <Image
+          source={{ uri: "https://randomuser.me/api/portraits/women/26.jpg" }}
+          style={{ width: '40%', height: '40%' }}
         />
+        <Text>By the doctor, For the doctor</Text>
       </View>
-
-
-      {showSolution && (
-        <View className="bg-white rounded-lg p-4 mt-5 shadow-md">
-          <Text className="text-primary font-bold">Solution:</Text>
-          <Markdown>{solution?.statement}</Markdown>
-        </View>
-      )}
-    </ScrollView>
+      <Divider />
+    </View>
   );
-};
-
-export default QuestionPage;
+}
