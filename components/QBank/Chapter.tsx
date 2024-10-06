@@ -2,29 +2,13 @@ import React from 'react';
 import { View, Text, Image } from 'react-native';
 import { ChapterProps } from './types';
 import { useTheme } from '@/hooks/useTheme';
+import { Card } from '../common/Card';
 
 const Chapter: React.FC<{ chapter: ChapterProps }> = ({ chapter }) => {
   const { appTheme } = useTheme();
 
   return (
-    <View
-      key={chapter.id}
-      style={{
-        backgroundColor: appTheme.colors.primary,
-        borderRadius: appTheme.borderRadius.small,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.8,
-        shadowRadius: 10,
-        elevation: 5,
-        marginBottom: appTheme.spacing.medium,
-        flexDirection: 'row',
-        alignItems: 'center',
-        borderColor: appTheme.colors.secondary,
-        borderLeftWidth: 6,
-        padding: appTheme.spacing.small,
-      }}
-    >
+    <Card>
       <Image
         source={{ uri: 'https://via.placeholder.com/50' }}
         style={{
@@ -54,7 +38,7 @@ const Chapter: React.FC<{ chapter: ChapterProps }> = ({ chapter }) => {
           {chapter.description || 'No description available'}
         </Text>
       </View>
-    </View>
+    </Card>
   );
 };
 

@@ -1,27 +1,53 @@
-import { Text, View } from 'react-native';
+import { Text, View, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 
 export default function PYQ() {
   const { appTheme } = useTheme();
 
   return (
-    <View className="flex-1 p-4 justify-center" style={{ backgroundColor: appTheme.colors.background }}>
-      {/* PYT Card */}
-      <View className="border-2 rounded-lg p-4 w-full" style={{ borderColor: appTheme.colors.primary, backgroundColor: appTheme.colors.secondaryBackground }}>
-        <Text className="text-2xl font-bold" style={{ color: appTheme.colors.text }}>Previous Year Topic</Text>
-        <Text className="mt-2" style={{ color: appTheme.colors.mutedText }}>Revise cardinal points before the exam.</Text>
-        <Text className="italic" style={{ color: appTheme.colors.textSecondary }}>#Cortex Creative Minds</Text>
-      </View>
+    <View className="flex-1 p-4 justify-center" style={{ backgroundColor: appTheme.colors.quaternary }}>
+      <TouchableOpacity>
+        <View
+          className="rounded-xl p-6 mb-6 shadow-lg"
+          style={{
+            backgroundColor: appTheme.colors.secondaryBackground,
+            borderColor: appTheme.colors.primary,
+            borderWidth: 1,
+          }}
+        >
+          <Text className="text-xl font-semibold mb-2" style={{ color: appTheme.colors.text }}>
+            Previous Year Topics
+          </Text>
+          <Text className="text-base" style={{ color: appTheme.colors.mutedText }}>
+            Revise cardinal points before the exam.
+          </Text>
+          <Text className="text-sm italic mt-2" style={{ color: appTheme.colors.textSecondary }}>
+            #Cortex Creative Minds
+          </Text>
+        </View>
+      </TouchableOpacity>
 
-      {/* PYQ Card */}
-      <View className="border-2 rounded-lg p-4 w-full mt-8" style={{ borderColor: appTheme.colors.primary, backgroundColor: appTheme.colors.secondaryBackground }}>
-        <Text className="text-2xl font-bold" style={{ color: appTheme.colors.text }}>Previous Year Q</Text>
-      </View>
+      <TouchableOpacity>
+        <View
+          className="rounded-xl p-6 mb-6 shadow-lg"
+          style={{
+            backgroundColor: appTheme.colors.secondaryBackground,
+            borderColor: appTheme.colors.primary,
+            borderWidth: 1,
+          }}
+        >
+          <Text className="text-xl font-semibold mb-2" style={{ color: appTheme.colors.text }}>
+            Previous Year Questions
+          </Text>
+        </View>
+      </TouchableOpacity>
 
-      {/* G.T. Section */}
       <View className="mt-8 flex items-center">
-        <Text className="text-lg font-bold" style={{ color: appTheme.colors.errorText }}>G.T ➔ Will be Updated Shortly.</Text>
+        <Text className="text-lg font-bold" style={{ color: appTheme.colors.errorText }}>
+          G.T ➔ Will be Updated Shortly.
+        </Text>
       </View>
+
     </View>
   );
 }

@@ -6,7 +6,11 @@ type ApiError = {
   status?: number;
 };
 
-export const useApi = <T>(url: string, options?: AxiosRequestConfig) => {
+export const useApi = <T>(
+  url: string,
+  token?: string,
+  options?: AxiosRequestConfig
+) => {
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<ApiError | null>(null);
@@ -15,8 +19,16 @@ export const useApi = <T>(url: string, options?: AxiosRequestConfig) => {
     setIsLoading(true);
 
     try {
-      const response: AxiosResponse<T> = await axios(url, options);
-      // console.log(JSON.stringify(response.data));
+      const config: AxiosRequestConfig = {
+        ...options,
+        headers: {
+          ...options?.headers,
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const response: AxiosResponse<T> = await axios(url, config);
+
       setData(response.data);
     } catch (err) {
       console.error("API Error:", err);
@@ -35,7 +47,7 @@ export const useApi = <T>(url: string, options?: AxiosRequestConfig) => {
 
   useEffect(() => {
     fetchData();
-  }, [url, options]);
+  }, [url, token, options]);
 
   return { data, isLoading, error };
 };
