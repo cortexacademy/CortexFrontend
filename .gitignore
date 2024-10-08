@@ -29,6 +29,7 @@ npm-debug.*
 .env
 .env/
 
+android
 # Coverage reports
 coverage/
 

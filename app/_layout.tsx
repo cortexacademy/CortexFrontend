@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import { ThemeProvider as NavigationThemeProvider, DarkTheme, DefaultTheme } from '@react-navigation/native';
+import { DarkTheme, DefaultTheme } from '@react-navigation/native';
 import { ThemeProvider, ThemeContext } from '@/styles/themeContext';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
@@ -36,9 +36,7 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      <NavigationThemeProvider value={navTheme}>
-        <AppStack />
-      </NavigationThemeProvider>
+      <AppStack />
     </ThemeProvider>
   );
 }
