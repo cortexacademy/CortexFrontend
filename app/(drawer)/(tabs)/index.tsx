@@ -12,10 +12,10 @@ export default function Home() {
 
   return (
     <ScrollView
-      style={{ flex: 1, backgroundColor: appTheme.colors.background }}
+      style={{ flexGrow: 1, backgroundColor: appTheme.colors.background }}
       contentContainerStyle={{ flexGrow: 1 }}
     >
-      <View className='items-center justify-center'>
+      <View style={{ flexGrow: 1 }} className='items-center justify-center'>
         <Image
           source={{ uri: "https://randomuser.me/api/portraits/women/26.jpg" }}
           style={{ width: '40%', height: '40%' }}

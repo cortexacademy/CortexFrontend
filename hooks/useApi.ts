@@ -6,6 +6,12 @@ type ApiError = {
   status?: number;
 };
 
+export interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  data: T;
+}
+
 export const useApi = <T>(
   url: string,
   token?: string,

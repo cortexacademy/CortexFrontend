@@ -1,12 +1,21 @@
+import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
+import { router } from 'expo-router';
 
 export default function PYQ() {
   const { appTheme } = useTheme();
 
+  const handleNavigateToSubjects = (type: 'topics' | 'quiz') => {
+    router.push({
+      pathname: '/pyq/exam',
+      params: { type },
+    });
+  };
+
   return (
     <View className="flex-1 p-4 justify-center" style={{ backgroundColor: appTheme.colors.quaternary }}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => handleNavigateToSubjects('topics')}>
         <View
           className="rounded-xl p-6 mb-6 shadow-lg"
           style={{
@@ -27,7 +36,7 @@ export default function PYQ() {
         </View>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => handleNavigateToSubjects('quiz')}>
         <View
           className="rounded-xl p-6 mb-6 shadow-lg"
           style={{
@@ -47,7 +56,6 @@ export default function PYQ() {
           G.T ➔ Will be Updated Shortly.
         </Text>
       </View>
-
     </View>
   );
 }

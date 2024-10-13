@@ -19,9 +19,9 @@ export const SearchableList = <T extends { [key: string]: any }>({
   const { appTheme } = useTheme();
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const filteredItems = items.filter((item) =>
+  const filteredItems = Array.isArray(items) ? items.filter((item) =>
     item[searchKey].toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  ) : [];
 
   const handleSearchInputChange = (text?: string) => setSearchQuery(text || '');
 
@@ -47,13 +47,15 @@ export const SearchableList = <T extends { [key: string]: any }>({
           size: 20,
           color: appTheme.colors.inputicon,
         }}
-        clearIcon={{
-          name: 'close-circle',
-          type: 'ionicon',
-          size: 20,
-          color: appTheme.colors.inputicon,
-          onPress: () => setSearchQuery(''),
-        }}
+        clearIcon={
+          {
+            name: 'close-circle',
+            type: 'ionicon',
+            size: 20,
+            color: appTheme.colors.inputicon,
+            onPress: () => setSearchQuery(''),
+          }
+        }
         onBlur={() => { }}
         onFocus={() => { }}
         platform="default"
@@ -69,7 +71,10 @@ export const SearchableList = <T extends { [key: string]: any }>({
       />
 
       <ScrollView>
-        <View className="flex-1 pt-2 pb-2 pl-8 pr-8 mt-4" style={{ backgroundColor: appTheme.colors.grey }}>
+        <View
+          className="flex-1 pt-2 pb-2 pl-8 pr-8 mt-4"
+          style={{ backgroundColor: appTheme.colors.grey }}
+        >
           {filteredItems.length > 0 ? (
             filteredItems.map(renderItem)
           ) : (

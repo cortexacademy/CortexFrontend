@@ -2,9 +2,8 @@ import React from 'react';
 import { useTheme } from '@/hooks/useTheme';
 import { Stack } from 'expo-router';
 
-
 export default function AppStack() {
-  const { appTheme } = useTheme()
+  const { appTheme } = useTheme();
 
   return (
     <Stack
@@ -16,11 +15,19 @@ export default function AppStack() {
         headerShown: true,
       }}
     >
-      {/* ----------------------All Drawer screens--------------------------- */}
-      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-      <Stack.Screen name="home/settings" options={{ title: 'Settings Page' }} />
+      {/* ----------------------Main Drawer Screen--------------------------- */}
+      <Stack.Screen
+        name="(drawer)"
+        options={{ headerShown: false }}
+      />
 
-      {/* ----------------------All QBank screens--------------------------- */}
+      {/* ----------------------Settings Screen--------------------------- */}
+      <Stack.Screen
+        name="home/settings"
+        options={{ title: 'Settings Page' }}
+      />
+
+      {/* ----------------------QBank Screen with Dynamic Title--------------------------- */}
       <Stack.Screen
         name="subject/[id]"
         options={({ route }) => {
@@ -30,7 +37,30 @@ export default function AppStack() {
           };
         }}
       />
-      <Stack.Screen name="+not-found" />
+
+      {/* ----------------------PYQ Flow Screens--------------------------- */}
+      <Stack.Screen
+        name="pyq/exam"
+        options={{ title: 'Exams' }}
+      />
+      <Stack.Screen
+        name="pyq/subject"
+        options={{ title: 'Subjects' }}
+      />
+      <Stack.Screen
+        name="pyq/year"
+        options={{ title: 'Years' }}
+      />
+      <Stack.Screen
+        name="pyq/topic"
+        options={{ title: 'Topics' }}
+      />
+
+      {/* ----------------------404 Not Found Screen--------------------------- */}
+      <Stack.Screen
+        name="+not-found"
+        options={{ title: 'Page Not Found' }}
+      />
     </Stack>
   );
 }

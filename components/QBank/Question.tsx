@@ -1,13 +1,10 @@
-
-
 import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Markdown from 'react-native-markdown-display';
-import { useApi } from '@/hooks/useApi';
+import { useApi, ApiResponse } from '@/hooks/useApi';
 import { Loader } from '@/components/LoaderComponent';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from 'react-native-elements';
-import { ApiResponse } from '@/components/QBank/types';
 
 interface QuestionData {
   statement: string;
@@ -27,7 +24,7 @@ interface QuestionData {
 
 const QuestionPage: React.FC = () => {
   const { appTheme } = useTheme();
-  const token = '8bfcea926299a5404998d6a63b9792f14e8e7b70';
+  const token = process.env.TOKEN;
   const { data, isLoading, error } = useApi<ApiResponse<QuestionData>>(`${process.env.EXPO_PUBLIC_API_URL}/question/3/`, token);
 
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
@@ -62,7 +59,7 @@ const QuestionPage: React.FC = () => {
   const { statement, options, solution } = data.data;
 
   return (
-    <ScrollView contentContainerStyle={{ padding: 16 }} style={{ backgroundColor: appTheme.colors.quaternary }} className="bg-quaternary">
+    <View style={{ padding: 16, backgroundColor: appTheme.colors.quaternary }} className="bg-quaternary">
       <View className="rounded-lg p-4 my-3 shadow-md" style={{ backgroundColor: appTheme.colors.tertiary }}>
         <Markdown>{statement}</Markdown>
       </View>
@@ -116,7 +113,7 @@ const QuestionPage: React.FC = () => {
           <Markdown>{solution?.statement}</Markdown>
         </View>
       )}
-    </ScrollView>
+    </View>
   );
 };
 

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { useApi } from '@/hooks/useApi';
+import { useApi, ApiResponse } from '@/hooks/useApi';
 import { Loader } from '@/components/LoaderComponent';
 import Subject from '@/components/QBank/Subjects';
-import { Subject as SubjectType, ApiResponse } from '@/components/QBank/types';
+import { Subject as SubjectType } from '@/components/QBank/types';
 import { router } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchableList } from '@/components/common/SearchableList';
