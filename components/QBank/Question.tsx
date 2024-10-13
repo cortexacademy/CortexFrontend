@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import { useApi, ApiResponse } from '@/hooks/useApi';
-import { Loader } from '@/components/LoaderComponent';
+import { Loader } from '@/components/common/LoaderComponent';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from 'react-native-elements';
 
@@ -24,7 +24,7 @@ interface QuestionData {
 
 const QuestionPage: React.FC = () => {
   const { appTheme } = useTheme();
-  const token = process.env.TOKEN;
+  const token = process.env.EXPO_PUBLIC_API_TOKEN;
   const { data, isLoading, error } = useApi<ApiResponse<QuestionData>>(`${process.env.EXPO_PUBLIC_API_URL}/question/3/`, token);
 
   const [selectedOption, setSelectedOption] = useState<number | null>(null);

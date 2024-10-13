@@ -1,15 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { useApi, ApiResponse } from '@/hooks/useApi';
-import { Loader } from '@/components/LoaderComponent';
+import { Loader } from '@/components/common/LoaderComponent';
 import { Year as YearType } from '@/types/pyqtypes';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchableList } from '@/components/common/SearchableList';
 import { router, useLocalSearchParams } from 'expo-router';
+import { Card } from '@/components/common/Card';
 
 const YearsScreen: React.FC = () => {
   const { appTheme } = useTheme();
-  const { subjectId } = useLocalSearchParams();
+  const { subjectId, examId } = useLocalSearchParams();
   const { data, isLoading, error } = useApi<ApiResponse<YearType[]>>(
     `${process.env.EXPO_PUBLIC_API_URL}/subject/${subjectId}/years/`
   );
@@ -34,8 +35,8 @@ const YearsScreen: React.FC = () => {
 
   const handleYearSelect = (yearId: number) => {
     router.push({
-      pathname: '/pyq/topic',
-      params: { subjectId, yearId },
+      pathname: '/pyq/study-material',
+      params: { yearId, subjectId, examId }
     });
   };
 
@@ -44,19 +45,13 @@ const YearsScreen: React.FC = () => {
       items={data.data}
       searchKey="year"
       renderItem={(year: YearType) => (
-        <TouchableOpacity onPress={() => handleYearSelect(year.id)}>
-          <View
-            className="rounded-lg p-4 mb-4"
-            style={{ backgroundColor: appTheme.colors.secondaryBackground }}
-          >
-            <Text
-              className="text-lg font-semibold"
-              style={{ color: appTheme.colors.text }}
-            >
+        <Card key={year.id} onPress={() => handleYearSelect(year.id)} containerStyle={{ padding: 16 }}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: appTheme.colors.white, fontSize: appTheme.fontSizes.medium, fontWeight: 'bold' }}>
               {year.year}
             </Text>
           </View>
-        </TouchableOpacity>
+        </Card>
       )}
       noItemsText="No years found matching your search."
     />

@@ -33,6 +33,7 @@ export const useApi = <T>(
         },
       };
 
+      console.log("response", url, config);
       const response: AxiosResponse<T> = await axios(url, config);
 
       setData(response.data);
@@ -53,7 +54,7 @@ export const useApi = <T>(
 
   useEffect(() => {
     fetchData();
-  }, [url, token, options]);
+  }, [url, token]);
 
   return { data, isLoading, error };
 };

@@ -3,9 +3,10 @@ import { View, Text } from 'react-native';
 import { useApi, ApiResponse } from '@/hooks/useApi';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchableList } from '@/components/common/SearchableList';
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { Topic } from '@/types/pyqtypes';
-import { Loader } from '@/components/LoaderComponent';
+import { Loader } from '@/components/common/LoaderComponent';
+import { Card } from '@/components/common/Card';
 
 export default function TopicsScreen() {
   const { appTheme } = useTheme();
@@ -45,32 +46,30 @@ export default function TopicsScreen() {
       </View>
     );
   }
+  const handleTopicSelect = (yearId: number) => {
+    router.push({
+      pathname: '/pyq/study-material',
+      params: { materialId: yearId },
+    });
+  };
 
   return (
     <SearchableList
       items={topics}
       searchKey="name"
       renderItem={(topic: Topic) => (
-        <View
-          key={topic.id}
-          className="rounded-lg p-4 mb-4"
-          style={{ backgroundColor: appTheme.colors.secondaryBackground }}
-        >
-          <Text
-            className="text-lg font-semibold"
-            style={{ color: appTheme.colors.text }}
-          >
-            {topic.name}
-          </Text>
-          {topic.description && (
-            <Text
-              className="text-sm"
-              style={{ color: appTheme.colors.textSecondary, marginTop: appTheme.spacing.small }}
-            >
-              {topic.description}
+        <Card key={topic.id} onPress={() => handleTopicSelect(topic.id)}>
+          <View style={{ flex: 1 }}>
+            <Text style={{ color: appTheme.colors.white, fontSize: appTheme.fontSizes.medium, fontWeight: 'bold' }}>
+              {topic.name}
             </Text>
-          )}
-        </View>
+            {topic.description && (
+              <Text style={{ color: appTheme.colors.white, fontSize: appTheme.fontSizes.medium, fontWeight: 'bold' }}>
+                {topic.description}
+              </Text>
+            )}
+          </View>
+        </Card>
       )}
       noItemsText="No topics found."
     />

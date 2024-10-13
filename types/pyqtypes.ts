@@ -19,3 +19,8 @@ export type Topic = {
   name: string;
   description?: string;
 };
+
+export type StudyMaterialType = {
+  id: number;
+  statement: string;
+};

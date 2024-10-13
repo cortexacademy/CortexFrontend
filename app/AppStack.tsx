@@ -55,6 +55,10 @@ export default function AppStack() {
         name="pyq/topic"
         options={{ title: 'Topics' }}
       />
+      <Stack.Screen
+        name="pyq/study-material"
+        options={{ title: 'StudyMaterial' }}
+      />
 
       {/* ----------------------404 Not Found Screen--------------------------- */}
       <Stack.Screen

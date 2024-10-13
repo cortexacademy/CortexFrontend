@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useApi, ApiResponse } from '@/hooks/useApi';
-import { Loader } from '@/components/LoaderComponent';
+import { Loader } from '@/components/common/LoaderComponent';
 import { Exam as ExamType } from '@/types/pyqtypes';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchableList } from '@/components/common/SearchableList';

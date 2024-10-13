@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { useApi, ApiResponse } from '@/hooks/useApi';
-import { Loader } from '@/components/LoaderComponent';
+import { Loader } from '@/components/common/LoaderComponent';
 import { Subject as SubjectType } from '@/types/pyqtypes';
 import { useTheme } from '@/hooks/useTheme';
 import { SearchableList } from '@/components/common/SearchableList';
@@ -37,7 +37,7 @@ const SubjectsScreen: React.FC = () => {
   const handleSubjectSelect = (subjectId: number) => {
     router.push({
       pathname: '/pyq/year',
-      params: { subjectId },
+      params: { subjectId, examId },
     });
   };
 
