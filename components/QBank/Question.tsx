@@ -1,120 +1,122 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import Markdown from 'react-native-markdown-display';
-import { useApi, ApiResponse } from '@/hooks/useApi';
 import { Loader } from '@/components/common/LoaderComponent';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from 'react-native-elements';
 
-interface QuestionData {
+interface QuestionOption {
+  id: number;
   statement: string;
-  options: Array<{
-    id: number;
-    statement: string;
-    is_correct: boolean;
-  }>;
+  is_correct: boolean;
+}
+
+interface QuestionData {
+  id: number;
+  statement: string;
+  options: QuestionOption[];
   solution: {
     statement: string;
   };
+  user_attempt?: {
+    selected_option: number[];
+  } | null;
 }
 
-// interface ApiResponse {
-//   data: QuestionData;
-// }
+interface QuestionComponentProps {
+  question: QuestionData;
+  viewsolution?: boolean;
+  showUserAttempts?: boolean;
+  index?: number;
+  isquiz?: boolean;
+}
 
-const QuestionPage: React.FC = () => {
+export const QuestionComponent: React.FC<QuestionComponentProps> = ({ isquiz = false, showUserAttempts = false, question, viewsolution = false, index }) => {
   const { appTheme } = useTheme();
-  const token = process.env.EXPO_PUBLIC_API_TOKEN;
-  const { data, isLoading, error } = useApi<ApiResponse<QuestionData>>(`${process.env.EXPO_PUBLIC_API_URL}/question/3/`, token);
-
+  const [showSolution, setShowSolution] = useState<boolean>(viewsolution);
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
-  const [showSolution, setShowSolution] = useState<boolean>(false);
   const [isOptionSelected, setIsOptionSelected] = useState<boolean>(false);
+  const optionLabels = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
-  const handleOptionSelect = (optionId: number, isCorrect: boolean) => {
+  useEffect(() => {
+    if (question.user_attempt && showUserAttempts && question.user_attempt.selected_option.length > 0) {
+      setSelectedOption(question.user_attempt.selected_option[0]);
+      setIsOptionSelected(true);
+    }
+  }, [question]);
+
+  useEffect(() => {
+    setShowSolution(viewsolution);
+  }, [viewsolution]);
+
+  const handleOptionSelect = (optionId: number) => {
     setSelectedOption(optionId);
     setIsOptionSelected(true);
+    setShowSolution(true)
   };
 
-  if (isLoading) return <Loader />;
-
-  if (error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-errorBackground">
-        <Text className="text-errorText">
-          Error: {error.message} (Status: {error.status})
-        </Text>
-      </View>
-    );
-  }
-
-  if (!data || !data.data) {
-    return (
-      <View className="flex-1 justify-center items-center bg-background">
-        <Text className="text-textSecondary">No question data available.</Text>
-      </View>
-    );
-  }
-
-  const { statement, options, solution } = data.data;
+  const { statement, options, solution } = question;
 
   return (
-    <View style={{ padding: 16, backgroundColor: appTheme.colors.quaternary }} className="bg-quaternary">
+    <ScrollView style={{ padding: 8, backgroundColor: appTheme.colors.quaternary }}>
       <View className="rounded-lg p-4 my-3 shadow-md" style={{ backgroundColor: appTheme.colors.tertiary }}>
+        {index &&
+          <Text className="text-xl font-bold">Question {index}:</Text>
+        }
         <Markdown>{statement}</Markdown>
       </View>
 
       <View className="bg-white rounded-lg p-4 mt-2 shadow-md">
-        {options.map((option: any) => {
+        {options.map((option, index) => {
           const isSelected = selectedOption === option.id;
-          const isCorrect = option.is_correct;
+          // const isCorrect = option.is_correct;
 
-          const backgroundColor = isOptionSelected
-            ? isSelected
-              ? isCorrect ? 'bg-green-200' : 'bg-red-200'
-              : isCorrect ? 'bg-green-200' : 'bg-gray-100'
-            : 'bg-white';
+          const backgroundColor = isquiz
+            ? isSelected ? 'bg-blue-200' : 'bg-white'
+            : isOptionSelected
+              ? isSelected
+                ? option.is_correct ? 'bg-green-200' : 'bg-red-200'
+                : option.is_correct ? 'bg-green-200' : 'bg-gray-100'
+              : 'bg-white';
 
           return (
             <TouchableOpacity
               key={option.id}
               className="flex-1"
-              onPress={() => handleOptionSelect(option.id, option.is_correct)}
+              onPress={() => handleOptionSelect(option.id)}
+            // disabled={isOptionSelected}
             >
               <View
-                key={option.id}
                 className={`flex-row items-center mb-2 p-2 rounded-lg shadow-sm border border-gray-300 ${backgroundColor}`}
               >
+                {/* <Text className="text-xl font-bold">{optionLabels[index]}:</Text> */}
                 <Markdown>{option.statement}</Markdown>
               </View>
             </TouchableOpacity>
           );
         })}
       </View>
-
-      <View className="flex-row justify-start mt-5">
-        <Button
-          className="w-1/2 items-center rounded-lg shadow-lg"
-          style={{ backgroundColor: appTheme.colors.primary }}
-          onPress={() => setShowSolution(!showSolution)}
-          title={!showSolution ? 'Show Solution' : 'Hide Solution'}
-          buttonStyle={{
-            backgroundColor: appTheme.colors.primary,
-            // width: '100%',
-          }}
-          titleStyle={{ color: appTheme.colors.text }}
-        />
-      </View>
-
-
-      {showSolution && (
-        <View className="bg-white rounded-lg p-4 mt-5 shadow-md">
-          <Text className="text-primary font-bold">Solution:</Text>
-          <Markdown>{solution?.statement}</Markdown>
+      {!isquiz &&
+        <View className="mt-5">
+          <Button
+            className="w-1/2 items-center rounded-lg shadow-lg"
+            style={{ backgroundColor: appTheme.colors.primary }}
+            onPress={() => setShowSolution(!showSolution)}
+            title={!showSolution ? 'Show Solution' : 'Hide Solution'}
+            buttonStyle={{
+              backgroundColor: appTheme.colors.primary,
+            }}
+            titleStyle={{ color: appTheme.colors.contrast, fontFamily: appTheme.fontFamily, fontSize: 18 }}
+          />
         </View>
-      )}
-    </View>
+      }
+
+      {showSolution && !isquiz ? (
+        <View className="bg-white rounded-lg p-4 mt-5 shadow-md">
+          <Text className="text-xl font-bold">Solution:</Text>
+          <Markdown>{solution.statement}</Markdown>
+        </View>
+      ) : ''}
+    </ScrollView>
   );
 };
-
-export default QuestionPage;

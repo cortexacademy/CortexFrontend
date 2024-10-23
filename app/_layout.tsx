@@ -1,17 +1,16 @@
-import React, { useContext, useEffect } from 'react';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
-import { ThemeProvider, ThemeContext } from '@/styles/themeContext';
+import React, { useEffect } from 'react';
+import { ThemeProvider } from '@/styles/themeContext';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import { theme } from '@/styles/theme';
 import '../global.css';
 import AppStack from './AppStack';
+import { Provider } from 'react-redux';
+import store from '@/store';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const { currentTheme, appTheme } = useContext(ThemeContext);
-
   const [loaded] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
   });
@@ -26,17 +25,13 @@ export default function RootLayout() {
     return null;
   }
 
-  const navTheme = currentTheme === 'dark'
-    ? DarkTheme
-    : currentTheme === 'light'
-      ? DefaultTheme
-      : appTheme === theme.dark
-        ? DarkTheme
-        : DefaultTheme;
-
   return (
-    <ThemeProvider>
-      <AppStack />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <ThemeProvider>
+          <AppStack />
+        </ThemeProvider>
+      </Provider>
+    </GestureHandlerRootView>
   );
 }

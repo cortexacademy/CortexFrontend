@@ -5,7 +5,6 @@ import { Href } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 import { DrawerItemComponent } from "./DrawerItem";
 
-
 const handleShareApp = async () => {
   try {
     const result = await Share.share({

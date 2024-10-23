@@ -7,11 +7,12 @@ import { useTheme } from '@/hooks/useTheme';
 import { SearchableList } from '@/components/common/SearchableList';
 import { Card } from '@/components/common/Card';
 import { Image } from 'react-native-elements';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 
 const ExamsScreen: React.FC = () => {
   const { appTheme } = useTheme();
   const { data, isLoading, error } = useApi<ApiResponse<ExamType[]>>(`${process.env.EXPO_PUBLIC_API_URL}/exam/`);
+  const { type } = useLocalSearchParams();
 
   if (isLoading) return <Loader />;
 
@@ -34,7 +35,7 @@ const ExamsScreen: React.FC = () => {
   const handleExamSelect = (examId: number) => {
     router.push({
       pathname: '/pyq/subject',
-      params: { examId },
+      params: { examId, type },
     });
   };
 

@@ -15,17 +15,17 @@ export default function AppStack() {
         headerShown: true,
       }}
     >
+      {/* ----------------------Settings Screen--------------------------- */}
+      <Stack.Screen
+        name="home/settings"
+        options={{ title: 'Settings Page' }}
+      />
       {/* ----------------------Main Drawer Screen--------------------------- */}
       <Stack.Screen
         name="(drawer)"
         options={{ headerShown: false }}
       />
 
-      {/* ----------------------Settings Screen--------------------------- */}
-      <Stack.Screen
-        name="home/settings"
-        options={{ title: 'Settings Page' }}
-      />
 
       {/* ----------------------QBank Screen with Dynamic Title--------------------------- */}
       <Stack.Screen
@@ -58,6 +58,22 @@ export default function AppStack() {
       <Stack.Screen
         name="pyq/study-material"
         options={{ title: 'StudyMaterial' }}
+      />
+      <Stack.Screen
+        name="pyq/questions/index"
+        options={{ title: '' }}
+      />
+      <Stack.Screen
+        name="pyq/questions/view"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="pyq/questions/quiz"
+        options={{
+          headerShown: false,
+        }}
       />
 
       {/* ----------------------404 Not Found Screen--------------------------- */}

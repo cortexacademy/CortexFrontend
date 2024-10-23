@@ -10,7 +10,7 @@ import { Card } from '@/components/common/Card';
 
 const YearsScreen: React.FC = () => {
   const { appTheme } = useTheme();
-  const { subjectId, examId } = useLocalSearchParams();
+  const { subjectId, examId, type } = useLocalSearchParams();
   const { data, isLoading, error } = useApi<ApiResponse<YearType[]>>(
     `${process.env.EXPO_PUBLIC_API_URL}/subject/${subjectId}/years/`
   );
@@ -32,12 +32,18 @@ const YearsScreen: React.FC = () => {
       </View>
     );
   }
-
   const handleYearSelect = (yearId: number) => {
-    router.push({
-      pathname: '/pyq/study-material',
-      params: { yearId, subjectId, examId }
-    });
+    if (type === 'topics') {
+      router.push({
+        pathname: '/pyq/study-material',
+        params: { yearId, subjectId, examId, type }
+      });
+    } else {
+      router.push({
+        pathname: '/pyq/questions',
+        params: { yearId, subjectId, examId, type }
+      });
+    }
   };
 
   return (

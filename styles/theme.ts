@@ -1,3 +1,5 @@
+import { Platform } from "react-native";
+
 const baseTheme = {
   colors: {
     primary: "#16423C", // Lighter green
@@ -16,6 +18,9 @@ const baseTheme = {
     inputBackground: "#E9EFEC", // Input background
     placeholder: "#AAAAAA", // Placeholder gray text
     inputicon: "#16423C", // Input icon color
+    darkgray: "#6d7580",
+    midgray: "#aab0b7",
+    lightgray: "#ebebeb",
   },
   fontSizes: {
     small: 12,
@@ -28,7 +33,11 @@ const baseTheme = {
     medium: 16,
     large: 24,
   },
-  fontFamily: "SpaceMono",
+  fontFamily: Platform.select({
+    ios: "-apple-system",
+    android: "Roboto",
+    default: "sans-serif",
+  }),
   borderRadius: {
     small: 4,
     medium: 8,

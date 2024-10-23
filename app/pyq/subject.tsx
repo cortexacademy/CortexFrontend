@@ -11,7 +11,7 @@ import { useLocalSearchParams, router } from 'expo-router';
 
 const SubjectsScreen: React.FC = () => {
   const { appTheme } = useTheme();
-  const { examId } = useLocalSearchParams();
+  const { examId, type } = useLocalSearchParams();
   const { data, isLoading, error } = useApi<ApiResponse<{ subjects: SubjectType[] }>>(
     `${process.env.EXPO_PUBLIC_API_URL}/exam/${examId}`
   );
@@ -37,7 +37,7 @@ const SubjectsScreen: React.FC = () => {
   const handleSubjectSelect = (subjectId: number) => {
     router.push({
       pathname: '/pyq/year',
-      params: { subjectId, examId },
+      params: { subjectId, examId, type },
     });
   };
 

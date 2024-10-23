@@ -7,7 +7,6 @@ import { StudyMaterialType } from '@/types/pyqtypes';
 import Markdown from 'react-native-markdown-display';
 import { Loader } from '@/components/common/LoaderComponent';
 
-
 export default function StudyMaterialScreen() {
   const { appTheme } = useTheme();
   const { subjectId, examId, yearId } = useLocalSearchParams();
@@ -38,7 +37,7 @@ export default function StudyMaterialScreen() {
         <Markdown>{item.statement}</Markdown>
         // </View>
       )}
-      style={{ padding: 16 }}
+      style={{ padding: 16, }}
       ListEmptyComponent={<Text style={{ color: appTheme.colors.white }}>No study materials found.</Text>}
     />
   );
